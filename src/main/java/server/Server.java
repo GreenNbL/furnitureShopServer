@@ -1,7 +1,9 @@
 package server;
+import models.Delivery;
 import models.Furniture;
 import models.Provider;
 import models.User;
+import services.DeliveryService;
 import services.FurnitureService;
 import services.ProviderService;
 import services.UserService;
@@ -134,9 +136,7 @@ public class Server extends Thread
                         System.out.println("GetAllFurnitures");
                         FurnitureService furnitureService=new FurnitureService();
                         List<Furniture> furnitures=new ArrayList<Furniture>();
-                        System.out.println(1);
                         furnitures=furnitureService.findAllFurnitures();
-                        System.out.println(1);
                         System.out.println(furnitures);
                         soos.writeObject(furnitures);
                         break;
@@ -172,6 +172,39 @@ public class Server extends Thread
                         int id=(int)sois.readObject();
                         provider=providerService.findProvider(id);
                         soos.writeObject(provider);
+                        break;
+                    }
+                    case "DeleteDelivery": {
+                        System.out.println("DeleteDelivery");
+                        DeliveryService deliveryService=new DeliveryService();
+                        Delivery delivery=new Delivery();
+                        delivery=(Delivery) sois.readObject();
+                        deliveryService.deleteDelivery(delivery);
+                        break;
+                    }
+                    case "EditDelivery": {
+                        System.out.println("EditDelivery");
+                        DeliveryService deliveryService=new DeliveryService();
+                        Delivery delivery=new Delivery();
+                        delivery=(Delivery) sois.readObject();
+                        deliveryService.updateDelivery(delivery);
+                        break;
+                    }
+                    case "AddDelivery": {
+                        System.out.println("AddDelivery");
+                        DeliveryService deliveryService=new DeliveryService();
+                        Delivery delivery=new Delivery();
+                        delivery=(Delivery) sois.readObject();
+                        deliveryService.saveDelivery(delivery);
+                        break;
+                    }
+                    case "GetAllDeliveries": {
+                        System.out.println("GetAllDeliveries");
+                        DeliveryService deliveryService=new DeliveryService();
+                        List<Delivery> deliveries=new ArrayList<Delivery>();
+                        deliveries=deliveryService.findAllDeliveries();
+                        System.out.println(deliveries.toString());
+                        soos.writeObject(deliveries);
                         break;
                     }
                 }

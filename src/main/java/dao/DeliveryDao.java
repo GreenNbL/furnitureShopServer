@@ -34,7 +34,7 @@ public class DeliveryDao {
         session.close();
     }
     public List<Delivery> findAll() {
-        List<Delivery> deliveries = (List<Delivery>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From deliveries").list();
+        List<Delivery> deliveries = (List<Delivery>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Delivery").list();
         return deliveries;
     }
 }
