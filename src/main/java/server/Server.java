@@ -51,8 +51,7 @@ public class Server extends Thread
         try {
             sois = new ObjectInputStream(clientAccepted.getInputStream());
             soos = new ObjectOutputStream(clientAccepted.getOutputStream());//создание потока//вывода
-            while(true) {
-
+            while(clientAccepted.isConnected()) {
                 String command = (String) sois.readObject();
                 switch (command) {
                     case "SignUp": {
@@ -247,6 +246,23 @@ public class Server extends Thread
                         orderService.saveOrder(order);
                         break;
                     }
+                    case "FindOrderById": {
+                        System.out.println("FindOrderById");
+                        OrderService orderService=new OrderService();
+                        Order order =new Order();
+                        int id=(int)sois.readObject();
+                        order=orderService.findOrder(id);
+                        soos.writeObject(order);
+                        break;
+                    }
+                    case "DeleteOrder": {
+                        System.out.println("DeleteOrder");
+                        OrderService orderService=new OrderService();
+                        Order order =new Order();
+                        order=(Order) sois.readObject();
+                        orderService.deleteOrder(order);
+                        break;
+                    }
                 }
             }
 
@@ -254,8 +270,8 @@ public class Server extends Thread
         }catch(Exception e)  {
         } finally {
             try {
-               // sois.close();//закрытие потока ввода
-               // soos.close();//закрытие потока вывода
+                sois.close();//закрытие потока ввода
+                soos.close();//закрытие потока вывода
                 number --;
                 System.out.println("Number of connections: "+number);
             } catch(Exception e) {
