@@ -1,12 +1,6 @@
 package server;
-import models.Delivery;
-import models.Furniture;
-import models.Provider;
-import models.User;
-import services.DeliveryService;
-import services.FurnitureService;
-import services.ProviderService;
-import services.UserService;
+import models.*;
+import services.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -78,6 +72,7 @@ public class Server extends Thread
                         UserService userService=new UserService();
                         List<User> users=new ArrayList<User>();
                         users=userService.findAllUsers();
+                        System.out.println(users);
                         soos.writeObject(users);
                         break;
                     }
@@ -97,6 +92,15 @@ public class Server extends Thread
                         User user=new User();
                         user=(User)sois.readObject();
                         userService.deleteUser(user);
+                        break;
+                    }
+                    case "FindUserById": {
+                        System.out.println("FindUserById");
+                        UserService userService=new UserService();
+                        User user=new User();
+                        int id=(int)sois.readObject();
+                        user=userService.findUser(id);
+                        soos.writeObject(user);
                         break;
                     }
                     case "GetAllProviders": {
@@ -132,6 +136,25 @@ public class Server extends Thread
                         providerService.deleteProvider(provider);
                         break;
                     }
+                    case "FindProviderById": {
+                        System.out.println("FindProviderById");
+                        ProviderService providerService=new ProviderService();
+                        Provider provider =new Provider();
+                        int id=(int)sois.readObject();
+                        System.out.println(id);
+                        provider=providerService.findProvider(id);
+                        soos.writeObject(provider);
+                        break;
+                    }
+                    case "FindFurnitureById": {
+                        System.out.println("FindFurnitureById");
+                        FurnitureService furnitureService=new FurnitureService();
+                        Furniture furniture = new Furniture();
+                        int id=(int)sois.readObject();
+                        furniture=furnitureService.findFurniture(id);
+                        soos.writeObject(furniture);
+                        break;
+                    }
                     case "GetAllFurnitures": {
                         System.out.println("GetAllFurnitures");
                         FurnitureService furnitureService=new FurnitureService();
@@ -165,15 +188,6 @@ public class Server extends Thread
                         furnitureService.saveFurniture(furniture);
                         break;
                     }
-                    case "FindProviderById": {
-                        System.out.println("FindProviderById");
-                        ProviderService providerService=new ProviderService();
-                        Provider provider =new Provider();
-                        int id=(int)sois.readObject();
-                        provider=providerService.findProvider(id);
-                        soos.writeObject(provider);
-                        break;
-                    }
                     case "DeleteDelivery": {
                         System.out.println("DeleteDelivery");
                         DeliveryService deliveryService=new DeliveryService();
@@ -205,6 +219,32 @@ public class Server extends Thread
                         deliveries=deliveryService.findAllDeliveries();
                         System.out.println(deliveries.toString());
                         soos.writeObject(deliveries);
+                        break;
+                    }
+                    case "FindDeliveryById": {
+                        System.out.println("FindDeliveryById");
+                        DeliveryService deliveryService=new DeliveryService();
+                        Delivery delivery =new Delivery();
+                        int id=(int)sois.readObject();
+                        delivery=deliveryService.findDelivery(id);
+                        soos.writeObject(delivery);
+                        break;
+                    }
+                    case "GetAllOrders": {
+                        System.out.println("GetAllOrders");
+                        OrderService orderService=new OrderService();
+                        List<Order> orders=new ArrayList<Order>();
+                        orders=orderService.findAllOrders();
+                        System.out.println(orders);
+                        soos.writeObject(orders);
+                        break;
+                    }
+                    case "AddOrder": {
+                        System.out.println("AddOrder");
+                        OrderService orderService=new OrderService();
+                        Order order =new Order();
+                        order=(Order) sois.readObject();
+                        orderService.saveOrder(order);
                         break;
                     }
                 }

@@ -34,7 +34,7 @@ public class OrderDao {
         session.close();
     }
     public List<Order> findAll() {
-        List<Order> orders = (List<Order>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From orders").list();
+        List<Order> orders = (List<Order>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Order").list();
         return orders;
     }
 }

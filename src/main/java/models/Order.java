@@ -2,12 +2,12 @@ package models;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-
+import java.sql.Date;
 @Entity
 @Table(name = "orders")
 public class Order implements Serializable {
     @Id
+    @Column(name = "id_order")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idOrder;
 //    @Column(name = "id_user")
@@ -42,21 +42,28 @@ public class Order implements Serializable {
         this.idOrder = idOrder;
     }
 
-//    public int getIdUser() {
-//        return idUser;
-//    }
-//
-//    public void setIdUser(int idUser) {
-//        this.idUser = idUser;
-//    }
+    public int getIdUser() {
+        return user.getIdUser();
+    }
 
-//    public int getIdFurniture() {
-//        return idFurniture;
-//    }
-//
-//    public void setIdFurniture(int idFurniture) {
-//        this.idFurniture = idFurniture;
-//    }
+    public void setIdUser(int idUser) {
+        this.user.setIdUser(idUser);
+    }
+
+    public int getIdFurniture() {
+        return furniture.getIdFurniture();
+    }
+
+    public void setIdFurniture(int idFurniture) {
+        this.furniture.setIdFurniture( idFurniture);
+    }
+    public int getIdDelivery() {
+        return delivery.getIdDelivery();
+    }
+
+    public void setIdDelivery(int idDelivery) {
+        this.delivery.setIdDelivery( idDelivery);
+    }
 
     public int getAmount() {
         return amount;
