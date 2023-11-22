@@ -2,6 +2,7 @@ package services;
 
 import dao.OrderDao;
 import models.Order;
+import models.User;
 
 import java.util.List;
 
@@ -29,5 +30,8 @@ public class OrderService {
 
     public List<Order> findAllOrders() {
         return orderDao.findAll();
+    }
+    public List<Order> findAllOrdersByUserId(int id) {
+        return orderDao.findAllByUserId(id);
     }
 }
