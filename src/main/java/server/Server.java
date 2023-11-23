@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -235,6 +236,17 @@ public class Server extends Thread
                         OrderService orderService=new OrderService();
                         List<Order> orders=new ArrayList<Order>();
                         orders=orderService.findAllOrders();
+                        System.out.println(orders);
+                        soos.writeObject(orders);
+                        break;
+                    }
+                    case "GetOrderByPeriod": {
+                        System.out.println("GetOrderByPeriod");
+                        OrderService orderService=new OrderService();
+                        List<Order> orders=new ArrayList<Order>();
+                        Date startDate=(Date)sois.readObject();
+                        Date endDate=(Date)sois.readObject();
+                        orders=orderService.findAllByPeriod(startDate,endDate);
                         System.out.println(orders);
                         soos.writeObject(orders);
                         break;

@@ -4,6 +4,7 @@ import dao.OrderDao;
 import models.Order;
 import models.User;
 
+import java.sql.Date;
 import java.util.List;
 
 public class OrderService {
@@ -36,5 +37,9 @@ public class OrderService {
     }
     public List<Order> findAllActiveOrders() {
         return orderDao.findAllActiveOrders();
+    }
+    public List<Order> findAllByPeriod(Date startDate, Date endDate)
+    {
+        return orderDao.findAllByPeriod(startDate,endDate);
     }
 }
