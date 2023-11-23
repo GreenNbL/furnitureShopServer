@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import utils.HibernateSessionFactoryUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDao {
@@ -46,5 +47,17 @@ public class OrderDao {
     public List<Order> findAllByUserId(int id) {
         List<Order> orders = (List<Order>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Order where id_user="+id).list();
         return orders;
+    }
+    public List<Order> findAllActiveOrders() {
+        List<Order> orders=new ArrayList<Order>();
+        try{
+        orders = (List<Order>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("FROM Order AS o JOIN FETCH o.delivery AS d WHERE d.status = 'доставляется'").list();
+    }  catch (Exception e) {
+        e.printStackTrace();
+    }
+        if(orders.isEmpty())
+            return null;
+        else
+            return orders;
     }
 }

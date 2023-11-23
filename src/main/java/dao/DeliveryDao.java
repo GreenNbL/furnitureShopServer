@@ -21,10 +21,16 @@ public class DeliveryDao {
     }
     public void update(Delivery delivery) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        try{
         Transaction tx1 = session.beginTransaction();
         session.update(delivery);
         tx1.commit();
-        session.close();
+        }  catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+
     }
     public void delete(Delivery delivery) {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();

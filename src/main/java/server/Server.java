@@ -200,6 +200,7 @@ public class Server extends Thread
                         DeliveryService deliveryService=new DeliveryService();
                         Delivery delivery=new Delivery();
                         delivery=(Delivery) sois.readObject();
+                        System.out.println(delivery);
                         deliveryService.updateDelivery(delivery);
                         break;
                     }
@@ -255,6 +256,14 @@ public class Server extends Thread
                         soos.writeObject(order);
                         break;
                     }
+                    case "FindActiveOrders": {
+                        System.out.println("FindActiveOrders");
+                        OrderService orderService=new OrderService();
+                        List<Order> orders=new ArrayList<Order>();
+                        orders=orderService.findAllActiveOrders();
+                        soos.writeObject(orders);
+                        break;
+                    }
                     case "FindOrderByUserId": {
                         System.out.println("FindOrderByUserId");
                         OrderService orderService=new OrderService();
@@ -277,6 +286,7 @@ public class Server extends Thread
 
 
         }catch(Exception e)  {
+            throw new RuntimeException(e);
         } finally {
             try {
                 sois.close();//закрытие потока ввода
