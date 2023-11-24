@@ -251,6 +251,19 @@ public class Server extends Thread
                         soos.writeObject(orders);
                         break;
                     }
+                    case "GetOrderByPeriodAndIdFurniture": {
+                        System.out.println("GetOrderByPeriodAndIdFurniture");
+                        OrderService orderService=new OrderService();
+                        List<Order> orders=new ArrayList<Order>();
+                        Date startDate=(Date)sois.readObject();
+                        Date endDate=(Date)sois.readObject();
+                        int id =(int)sois.readObject();
+                        System.out.println(id);
+                        orders=orderService.findAllByPeriodAndIdFurniture(startDate,endDate,id);
+                        System.out.println(orders);
+                        soos.writeObject(orders);
+                        break;
+                    }
                     case "AddOrder": {
                         System.out.println("AddOrder");
                         OrderService orderService=new OrderService();

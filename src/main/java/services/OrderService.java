@@ -45,4 +45,8 @@ public class OrderService {
     {
         return orderDao.findAllByPeriod(startDate,endDate);
     }
+    public List<Order> findAllByPeriodAndIdFurniture(Date startDate, Date endDate,int id)
+    {
+        return orderDao.findAllByPeriodAndIdFurniture(startDate,endDate,id);
+    }
 }

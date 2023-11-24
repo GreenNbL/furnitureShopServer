@@ -95,4 +95,33 @@ public class OrderDao {
                 return orders;
         }
     }
+    public List<Order> findAllByPeriodAndIdFurniture(Date startDate, Date endDate,int id) {
+        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+        List<Order> orders =new ArrayList<>();
+        try {
+            session.beginTransaction();
+            // Создаем HQL запрос для выборки по промежутку времени
+            String hql = "FROM Order WHERE id_furniture= :id AND dateOrder BETWEEN :startDate AND :endDate";
+            Query<Order> query = session.createQuery(hql, Order.class);
+
+            // Устанавливаем параметры запроса
+            query.setParameter("id", id);
+            query.setParameter("startDate", startDate);
+            query.setParameter("endDate", endDate);
+            // Получаем результаты запроса
+            orders= query.getResultList();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            if (session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+            if(orders.isEmpty())
+                return null;
+            else
+                return orders;
+        }
+    }
 }
