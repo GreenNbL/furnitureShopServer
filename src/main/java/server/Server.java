@@ -285,6 +285,15 @@ public class Server extends Thread
                         soos.writeObject(orders);
                         break;
                     }
+                    case "FindOrderByFurnitureId": {
+                        System.out.println("FindOrderByFurnitureId");
+                        OrderService orderService=new OrderService();
+                        List<Order> orders=new ArrayList<Order>();
+                        int id=(int)sois.readObject();
+                        orders=orderService.findAllOrdersByFurnitureId(id);
+                        soos.writeObject(orders);
+                        break;
+                    }
                     case "DeleteOrder": {
                         System.out.println("DeleteOrder");
                         OrderService orderService=new OrderService();

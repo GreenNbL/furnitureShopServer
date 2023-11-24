@@ -50,6 +50,10 @@ public class OrderDao {
         List<Order> orders = (List<Order>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Order where id_user="+id).list();
         return orders;
     }
+    public List<Order> findAllByFurnitureId(int id) {
+        List<Order> orders = (List<Order>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From Order where id_furniture="+id).list();
+        return orders;
+    }
     public List<Order> findAllActiveOrders() {
         List<Order> orders=new ArrayList<Order>();
         try{

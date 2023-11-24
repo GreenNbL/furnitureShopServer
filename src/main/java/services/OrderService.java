@@ -35,6 +35,9 @@ public class OrderService {
     public List<Order> findAllOrdersByUserId(int id) {
         return orderDao.findAllByUserId(id);
     }
+    public List<Order> findAllOrdersByFurnitureId(int id) {
+        return orderDao.findAllByFurnitureId(id);
+    }
     public List<Order> findAllActiveOrders() {
         return orderDao.findAllActiveOrders();
     }
