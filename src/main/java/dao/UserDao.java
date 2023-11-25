@@ -1,5 +1,6 @@
 package dao;
 
+import models.Provider;
 import models.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -8,7 +9,7 @@ import utils.HibernateSessionFactoryUtil;
 
 import java.util.List;
 
-public class UserDao {
+public class UserDao implements Dao<User>{
     public User findById(int id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(User.class, id);
     }

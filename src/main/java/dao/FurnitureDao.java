@@ -1,5 +1,6 @@
 package dao;
 
+import models.Delivery;
 import models.Furniture;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -8,7 +9,7 @@ import utils.HibernateSessionFactoryUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FurnitureDao {
+public class FurnitureDao implements Dao<Furniture>{
     public Furniture findById(int id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Furniture.class, id);
     }

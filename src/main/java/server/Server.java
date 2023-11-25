@@ -272,6 +272,14 @@ public class Server extends Thread
                         orderService.saveOrder(order);
                         break;
                     }
+                    case "EditOrder": {
+                        System.out.println("Order");
+                        OrderService orderService=new OrderService();
+                        Order order =new Order();
+                        order=(Order) sois.readObject();
+                        orderService.updateOrder(order);
+                        break;
+                    }
                     case "FindOrderById": {
                         System.out.println("FindOrderById");
                         OrderService orderService=new OrderService();

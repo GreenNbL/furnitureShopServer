@@ -20,9 +20,6 @@ public class Order implements Serializable {
     private double totalCost;
     @Column(name = "date_order")
     private Date dateOrder;
-//    @Column(name = "id_delivery")
-//    private int idDelivery;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_delivery")
     private Delivery delivery;

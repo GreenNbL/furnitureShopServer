@@ -8,7 +8,7 @@ import utils.HibernateSessionFactoryUtil;
 
 import java.util.List;
 
-public class DeliveryDao {
+public class DeliveryDao implements Dao<Delivery> {
     public Delivery findById(int id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Delivery.class, id);
     }

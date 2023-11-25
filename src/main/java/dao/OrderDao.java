@@ -1,5 +1,6 @@
 package dao;
 
+import models.Furniture;
 import models.Order;
 import models.Provider;
 import models.User;
@@ -12,7 +13,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDao {
+public class OrderDao implements Dao<Order>{
     public Order findById(int id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Order.class, id);
     }
