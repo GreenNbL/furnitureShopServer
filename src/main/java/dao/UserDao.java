@@ -1,5 +1,6 @@
 package dao;
 
+import models.Order;
 import models.Provider;
 import models.User;
 import org.hibernate.Session;
@@ -41,6 +42,24 @@ public class UserDao implements Dao<User>{
         session.delete(user);
         tx1.commit();
         session.close();
+//        Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
+//        Transaction tx1 = session.beginTransaction();
+//        try {
+//            User user2 = session.get(User.class, user.getIdUser());
+//            for (Order order : user.getOrders()) {
+//                order.setIdUser(0);
+//                session.update(order);
+//            }
+//            session.delete(user);
+//            tx1.commit();
+//        } catch (Exception e) {
+//            if (tx1 != null) {
+//                tx1.rollback();
+//            }
+//            e.printStackTrace();
+//        } finally {
+//            session.close();
+//        }
     }
     public List<User> findAll() {
         //List<User> users = (List<User>)  HibernateSessionFactoryUtil.getSessionFactory().openSession().createQuery("From User").list();
