@@ -14,7 +14,6 @@ import java.util.Scanner;
 
 public class Server extends Thread
 {
-    private static int[][] matrix = new int[3][3];
     private Socket clientAccepted;
     private static int number=0;
     public Server(Socket clientAccepted)
